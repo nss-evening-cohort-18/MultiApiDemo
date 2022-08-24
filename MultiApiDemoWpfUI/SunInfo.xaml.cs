@@ -21,6 +21,7 @@ namespace MultiApiDemoUI
     /// </summary>
     public partial class SunInfo : Window
     {
+
         public SunInfo()
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace MultiApiDemoUI
 
         private async void loadSunInfo_Click(object sender, RoutedEventArgs e)
         {
-            var data = await SunProcessor.LoadSunInformation();
+            var data = await SunProcessor.LoadSunInformation(latitudeTextBox.Text, longitudeTextBox.Text);
 
             suriseText.Text = $"Sunrise is at {data.Sunrise.ToLocalTime().ToShortTimeString()}";
             sunsetText.Text = $"Sunset is at {data.Sunset.ToLocalTime().ToShortTimeString()}";
@@ -37,6 +38,11 @@ namespace MultiApiDemoUI
         private void close_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void CheckLoadButtonStatus(object sender, TextChangedEventArgs e)
+        {
+            loadSunInfo.IsEnabled = (latitudeTextBox.Text.Length > 0 && longitudeTextBox.Text.Length > 0);
         }
     }
 }

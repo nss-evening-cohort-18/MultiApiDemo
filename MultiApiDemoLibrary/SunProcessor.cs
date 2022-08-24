@@ -10,9 +10,9 @@ namespace MutliApiDemoLibrary;
 
 public class SunProcessor
 {
-    public static async Task<SunModel> LoadSunInformation(int comicNumber = 0)
+    public static async Task<SunModel> LoadSunInformation(string latitude, string longitude)
     {
-        string url = "http://api.sunrise-sunset.org/json?lat=35.7808561097964&lng=-86.90011240252441&date=today";
+        string url = $"http://api.sunrise-sunset.org/json?lat={latitude}&lng={longitude}&date=today";
 
         using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
         {
